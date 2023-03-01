@@ -1,0 +1,15 @@
+Name: Matt Allensworth
+Stack: Python
+GitHub Repo: https://github.com/MAllensworth
+Project Name: Lineup Builder
+Project Description: Fantasy football lineup builder! I am going to make an application that allows the user to create fantasy football rosters. The user will have a salary cap that they have to work under. Each roster will have a set requirement of positions that need to be filled. Each player within the player pool will have a set salary attached to them to be able to add them to the users roster. The user will be able to create a fantasy roster combination of whatever players they want as long as they stay within the salary cap that is provided. Users will be able to register and log in, create and edit their own roster, as well as view and like other users rosters that have been submitted. 
+MVP (Minimum Viable Product) Features: 
+- Project on GitHub
+- gitignore file in root foler
+- All CRUD on non user table 
+- CSS implemented 
+- All data is validated 
+- Protected routes
+Bonus Features: Need at least one bonus feature:
+- Application is responsive (add and delete players from roster, salary updates to reflect)
+- Many to many relationship (roster likes by other users)

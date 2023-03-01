@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous'>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj' crossorigin='anonymous'></script>
+    <script src="{{url_for('static', filename='/js/script.js')}}" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Lineups New</title>
+</head>
+<body>
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+    <h1 class="p-0 mx-auto">New Lineup</h1>
+    <div class="container d-flex justify-content-center mx-auto mt-5">
+        <div class="d-flex">
+            <a href="/dashboard" class="btn btn-outline-primary mr-2">Dashboard</a>
+            <a href="/user/logout" class="btn btn-outline-danger">Logout</a>
+        </div>
+<!-- Player Selections Table  -->
+    <div class="container justify-content-start col-5 my-5">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-qb-tab" data-bs-toggle="tab" data-bs-target="#nav-qb" type="button" role="tab" aria-controls="nav-qb" aria-selected="true">Quarterback</button>
+                <button class="nav-link" id="nav-rb-tab" data-bs-toggle="tab" data-bs-target="#nav-rb" type="button" role="tab" aria-controls="nav-rb" aria-selected="false">Running Back</button>
+                <button class="nav-link" id="nav-wr-tab" data-bs-toggle="tab" data-bs-target="#nav-wr" type="button" role="tab" aria-controls="nav-wr" aria-selected="false">Wide Receiver</button>
+                <button class="nav-link" id="nav-te-tab" data-bs-toggle="tab" data-bs-target="#nav-te" type="button" role="tab" aria-controls="nav-te" aria-selected="false">Tight End</button>
+                <button class="nav-link" id="nav-k-tab" data-bs-toggle="tab" data-bs-target="#nav-k" type="button" role="tab" aria-controls="nav-k" aria-selected="false">Kicker</button>
+                <button class="nav-link" id="nav-d-tab" data-bs-toggle="tab" data-bs-target="#nav-d" type="button" role="tab" aria-controls="nav-d" aria-selected="false">Defense</button>
+            </div>
+        </nav>
+        <!-- QB Tab -->
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-qb" role="tabpanel" aria-labelledby="nav-qb-tab" tabindex="0">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            {% if player.position == 'QB' %}
+                        <tr id="nav-qb1">
+                            <td>{{player.name}}</td>
+                            <td>{{player.position}}</td>
+                            <td>${{player.salary}}</td>
+                            <td><button type="submit" class="btn btn-primary" onclick="moveQB(this);">+</button></td>
+                        </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- RB Tab -->
+                <div class="tab-pane fade" id="nav-rb" role="tabpanel" aria-labelledby="nav-rb-tab" tabindex="0">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            {% if player.position == 'RB' %}
+                        <tr id="nav-rb1">
+                            <td>{{player.name}}</td>
+                            <td>{{player.position}}</td>
+                            <td>${{player.salary}}</td>
+                            <td><button type="submit" class="btn btn-primary" onclick="moveRB(this);">+</button></td>
+                        </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- WR Tab  -->
+                <div class="tab-pane fade" id="nav-wr" role="tabpanel" aria-labelledby="nav-wr-tab" tabindex="0">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            {% if player.position == 'WR' %}
+                        <tr id="nav-wr1">
+                            <td>{{player.name}}</td>
+                            <td>{{player.position}}</td>
+                            <td>${{player.salary}}</td>
+                            <td><button type="submit" class="btn btn-primary" onclick="moveWR(this);">+</button></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- TE Tab -->
+                <div class="tab-pane fade" id="nav-te" role="tabpanel" aria-labelledby="nav-te-tab" tabindex="0">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            {% if player.position == 'TE' %}
+                        <tr id="nav-te1">
+                            <td>{{player.name}}</td>
+                            <td>{{player.position}}</td>
+                            <td>${{player.salary}}</td>
+                            <td><button type="submit" class="btn btn-primary" onclick="moveTE(this);">+</button></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- K Tab -->
+                <div class="tab-pane fade" id="nav-k" role="tabpanel" aria-labelledby="nav-k-tab" tabindex="0">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            {% if player.position == 'K' %}
+                        <tr id="nav-k1">
+                            <td>{{player.name}}</td>
+                            <td>{{player.position}}</td>
+                            <td>${{player.salary}}</td>
+                            <td><button type="submit" class="btn btn-primary" onclick="moveK(this);">+</button></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Defense Tab -->
+                <div class="tab-pane fade" id="nav-d" role="tabpanel" aria-labelledby="nav-d-tab" tabindex="0">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            {% if player.position == 'D' %}
+                        <tr id="nav-d1">
+                            <td>{{player.name}}</td>
+                            <td>{{player.position}}</td>
+                            <td>${{player.salary}}</td>
+                            <td><button type="submit" class="btn btn-primary" onclick="moveD(this);">+</button></td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+    <!-- Roster Form Section  -->
+    
+    <form action="/new/roster" method="post" class="container justify-content-start col-5 my-5">
+        <div class="form-group">
+            <label for="salaryCap">Salary Cap</label>
+            <p id="salaryCap">$50000</p>
+        </div>
+    
+        <div class="form-group">
+            <label for="name">Roster Name</label>
+            <div class="input-group">
+            <input name="name" type="text" class="form-control" id="nameInput" placeholder="Name Your Roster">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="qbInput">Quarterback</label>
+            <div class="input-group">
+            <input name="quarterback" type="text" class="form-control" id="qbInput" placeholder="Add a Quarterback">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBack()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="rbInput">Running Back</label>
+            <div class="input-group">
+            <input name="running_back1" type="text" class="form-control" id="rbInput" placeholder="Add a Running Back">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackRB()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="rbInput">Running Back</label>
+            <div class="input-group">
+            <input name="running_back2" type="text" class="form-control" id="rb2Input" placeholder="Add a Running Back">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackRB2()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wrInput">Wide Receiver</label>
+            <div class="input-group">
+                <input name="wide_receiver1" type="text" class="form-control" id="wrInput" placeholder="Add a Wide Receiver">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackWR()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wrInput">Wide Receiver</label>
+            <div class="input-group">
+                <input name="wide_receiver2" type="text" class="form-control" id="wr2Input" placeholder="Add a Wide Receiver">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackWR2()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="teInput">Tight End</label>
+            <div class="input-group">
+                <input name="tight_end" type="text" class="form-control" id="teInput" placeholder="Add a Tight End">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackTE()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="kInput">Kicker</label>
+            <div class="input-group">
+                <input name="kicker" type="text" class="form-control" id="kInput" placeholder="Add a Kicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackK()">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dInput">Defense</label>
+            <div class="input-group">
+                <input name="defense" type="text" class="form-control" id="dInput" placeholder="Add a Defense">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="moveBackD()">-</button>
+                </div>
+            </div>
+        </div>
+        
+
+            <button type="submit" class="btn btn-primary">Save Lineup</button>
+        
+    </form>
+    </div>
+</body>
+</html>
+
+
+<!-- <form action="/new/roster" method="post" class="container justify-content-start col-5 my-5">
+    <div class="form-group">
+        <label for="salaryCap">Salary Cap</label>
+        <p id="salaryCap">$50000</p>
+    </div> -->
