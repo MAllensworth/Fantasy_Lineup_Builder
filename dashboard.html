@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <title>Lineups Dashboard</title>
+    <style>
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 50px 0;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .table {
+                border-radius: 10px;
+                box-shadow: 0 0 10px black;
+                color: white
+        }
+        body {
+            background-color: rgb(90, 86, 86);
+            color: white;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>{{user.first_name}} {{user.last_name}}</h1>
+                <div>
+                    <a href="/lineups/new" class="btn btn-primary">Create A Lineup!</a>
+                    <a href="/user/logout" class="btn btn-danger ml-3">Logout</a>
+                </div>
+            </div>
+            <h1>Lineups!</h1>
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Creator</th>
+                <th>Salary Used</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for roster in rosters %}
+            <tr>
+                <td>{{roster.name}}</td>
+                <td>{{roster.creator.first_name}}</td>
+                <td>{{roster.salary_used}}</td>
+                <td>{{roster.created_at.strftime('%B %dth, %Y')}}</td>
+                <td>
+                <a href="/rosters/{{roster.id}}" class="btn btn-success">View Description</a>
+                {% if session['user_id'] == roster.creator.id %}
+                <!-- <a href="/rosters/edit/{{roster.id}}" class="btn btn-secondary">Edit</a> -->
+                <a href="/rosters/delete/{{roster.id}}" class="btn btn-danger">Delete</a>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+</body>
+</html>
+
